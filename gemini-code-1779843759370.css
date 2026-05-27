@@ -1,0 +1,110 @@
+/* Variáveis do Sistema de Design */
+:root {
+    --bg-main: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --sidebar-width: 260px;
+    --purple-kpi: #8b5cf6;
+}
+
+/* Transições de Cores para o Dark Mode */
+body, .card, .list-group-item, .form-select, .form-control, table, th, td, nav {
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main) !important;
+    overflow-x: hidden;
+}
+
+/* Estrutura do Sidebar Responsivo */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: var(--sidebar-width);
+    margin-left: calc(-1 * var(--sidebar-width));
+    transition: margin 0.25s ease-out;
+    z-index: 1000;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: calc(-1 * var(--sidebar-width));
+    }
+}
+
+/* Cards com Animações e Elevações Suaves */
+.kpi-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+.kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.filter-card {
+    background-color: var(--card-bg);
+}
+
+/* Cores Adicionais Extra */
+.text-purple { color: var(--purple-kpi); }
+.border-purple { border-color: var(--purple-kpi) !important; }
+
+/* Configurações da Tabela */
+.table th {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+}
+.table th:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+/* Customização Perfeita de Dark Mode */
+body.dark-mode {
+    --bg-main: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+}
+
+body.dark-mode .bg-light { background-color: var(--bg-main) !important; }
+body.dark-mode .bg-white { background-color: var(--card-bg) !important; }
+body.dark-mode .card { background-color: var(--card-bg) !important; border-color: var(--border-color); }
+body.dark-mode .text-dark { color: var(--text-primary) !important; }
+body.dark-mode .text-muted { color: var(--text-muted) !important; }
+body.dark-mode .table { color: var(--text-primary) !important; border-color: var(--border-color); }
+body.dark-mode .table-light { background-color: #1e293b !important; color: var(--text-primary); }
+body.dark-mode .form-select, body.dark-mode .form-control, body.dark-mode .input-group-text {
+    background-color: #1e293b !important;
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Regras de Visualização Clean Print CSS */
+@media print {
+    #sidebar-wrapper, #menu-toggle, #theme-toggle, #btn-pdf, .filter-card, .card-footer {
+        display: none !important;
+    }
+    #page-content-wrapper { width: 100% !important; padding: 0 !important; }
+    .card { box-shadow: none !important; border: 1px solid #ccc !important; page-break-inside: avoid; }
+}
